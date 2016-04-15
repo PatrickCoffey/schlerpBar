@@ -1,0 +1,46 @@
+# Conky for external bar 
+# out simple text to console
+
+background no
+update_interval 3
+total_run_times 0
+override_utf8_locale yes
+short_units yes
+uppercase no
+out_to_console yes
+out_to_x no
+if_up_strictness address
+format_human_readable true
+
+#SYS\
+#${time %a %d %b %H:%M} \
+#${cpu} \
+#${mem} \
+#${fs_used_perc /} \
+#${fs_used_perc /home} \
+#${if_up wlan0}${downspeedf wlan0} ${upspeedf wlan0} \
+#${else}down down${endif} \
+#${if_up eth0}${downspeedf eth0} ${upspeedf eth0} \
+#${else}down down${endif}\
+
+#SYS \
+#time: ${time %a %d %b %H:%M} \
+#cpu: ${cpu} \
+#mem: ${mem} \
+#fs_root: ${fs_used_perc /} \
+#fs_home: ${fs_used_perc /home} \
+#bat_perc: ${battery_percent BAT0} \
+#bat_short: ${battery_short BAT0} \
+#${if_up wlp2s0}wifi_qual: ${wireless_link_qual_perc wlp2s0} wifi_down: ${downspeedf wlp2s0} wifi_up: ${upspeedf wlp2s0} \
+#${else}down down down${endif} \
+
+TEXT
+SYS \
+${time %a %d %b %H:%M} \
+${cpu} \
+${mem} \
+${fs_used_perc /} \
+${fs_used_perc /home} \
+${battery_short BAT0} \
+${if_up wlp2s0}${wireless_link_qual_perc wlp2s0} ${downspeedf wlp2s0} ${upspeedf wlp2s0} \
+${else}down down down${endif} \
