@@ -4,11 +4,13 @@
 panel_fifo="/tmp/i3_lemonbar_${USER}"
 panel_fifo_disk="/tmp/i3_lemonbar_disk_${USER}"
 panel_fifo_wifi="/tmp/i3_lemonbar_wifi_${USER}"
-geometry="3200x36"
-font="Minecraft:size=24"
-iconfont="FontAwesome:size=28"
+geometry="3200x48"
+font="Minecraft:size=14"
+iconfont="FontAwesome:size=14"
+font_notify="Minecraft"
+icon_font_notify="FontAwesome"
 #iconfont="Terminusicons2:size=28"
-iconfont2="OpenLogos:size=28"
+iconfont2="OpenLogos:size=14"
 res_w=$(xrandr | grep "current" | awk '{print $8a}')
 
 # Alarm settings
@@ -16,9 +18,7 @@ cpu_alert=75                        # % cpu use
 net_alert=5                         # K net use
 
 # update setting, in seconds (conky update in i3_lemonbar_conky
-upd_vol=10                           # Volume update
-upd_mail=300                        # Mail check update
-upd_mpd=10                           # MPD song update
+upd_vol=3                           # Volume update
 upd_xbl=10
 
 # color definitions 
@@ -44,32 +44,31 @@ else
 fi
 
 # actions
-act_arch_c="arch"
-act_wsp_1_c=""
-act_wsp_2_c=""
-act_wsp_3_c=""
-act_wsp_4_c=""
-act_wsp_5_c=""
-act_wsp_6_c=""
-act_wsp_7_c=""
-act_wsp_8_c=""
-act_wsp_9_c=""
-act_wsp_0_c=""
-act_title_c=""
-act_cpu_c="echo ./popup/lb_cpu.sh"
-act_mem_c="echo ./popup/lb_mem.sh"
-act_wifi_c="notify-send"
-#act_wifi_c="./popup/lb_wifi.sh"
-act_disk_c="./popup/lb_disk.sh"
+act_arch_c="echo arch"
+act_wsp_1_c="echo wsp1"
+act_wsp_2_c="echo wsp2"
+act_wsp_3_c="echo wsp3"
+act_wsp_4_c="echo wsp4"
+act_wsp_5_c="echo wsp5"
+act_wsp_6_c="echo wsp6"
+act_wsp_7_c="echo wsp7"
+act_wsp_8_c="echo wsp8"
+act_wsp_9_c="echo wsp9"
+act_wsp_0_c="echo wsp0"
+act_title_c="echo title"
+act_cpu_c="./popup/lb_notify.sh cpu"
+act_mem_c="./popup/lb_notify.sh mem"
+act_task_c="./popup/lb_notify.sh task"
+act_wifi_c="./popup/lb_notify.sh wifi"
+act_disk_c="./popup/lb_notify.sh disk"
 act_bat_c="echo ./popup/lb_bat.sh"
 act_xbl_u=""
 act_xbl_d=""
-act_xbl_c="xbl"
+act_xbl_c="echo ./popup/lb_notify.sh xbl"
 act_vol_u=""
 act_vol_d=""
-act_vol_c="vol"
-act_date_c="date"
-act_sub_c="kill $(pgrep -n lemonbar)"
+act_vol_c="echo ./popup/lb_notify.sh vol"
+act_date_c="echo ./popup/lb_notify.sh date"
 
 
 # Char glyps for powerline fonts
@@ -82,23 +81,25 @@ sep_l_right="${T2}${T1}"                # Powerline light sepatator right
 icon_clock=""                      # Clock icon
 icon_cpu=""                        # CPU icon
 icon_mem=""                        # MEM icon
-icon_wifi_con=""                            # icon for wifi connected
-icon_wifi_dis=""                            # icon for wifi disconnected
-icon_wifi_low=""                     # icon for wifi low
-icon_wifi_mid=""                     # icon for wifi mid
-icon_wifi_hi=""                        # icon for wifi hi
+icon_task=""                        # MEM icon
+icon_swap=""                         # Swap icon
+icon_wifi_con=""                   # icon for wifi connected
+icon_wifi_dis=""                   # icon for wifi disconnected
+icon_wifi_low=""                   # icon for wifi low
+icon_wifi_mid=""                   # icon for wifi mid
+icon_wifi_hi=""                    # icon for wifi hi
 icon_dl=""                         # Download icon
 icon_ul=""                         # Upload icon
 icon_vol=""                        # Volume icon
 icon_hd=""                         # HD / icon
 icon_home=""                       # HD /home icon
-icon_prog=" patty"                       # Window icon
-icon_wsp="B"                        # Workspace icon
-icon_bat=""			    # Icon for Battery
-icon_bat_ac=""			    # Icon for Battery ac
-icon_bat_low=""			    # Icon for Battery low
-icon_bat_low_mid=""			    # Icon for Battery low-mid
-icon_bat_mid_hi=""			    # Icon for Battery mid-hi
-icon_bat_hi=""			    # Icon for Battery hi
-icon_xbl=""	
+icon_prog=" patty"                  # Window icon
+icon_wsp="B"                         # Workspace icon
+icon_bat=""			             # Icon for Battery
+icon_bat_ac=""			             # Icon for Battery ac
+icon_bat_low=""			         # Icon for Battery low
+icon_bat_low_mid=""			     # Icon for Battery low-mid
+icon_bat_mid_hi=""			     # Icon for Battery mid-hi
+icon_bat_hi=""			         # Icon for Battery hi
+icon_xbl=""	                     # Icon for x backlight
 

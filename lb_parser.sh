@@ -25,23 +25,23 @@ while read -r line ; do
       time="${sys_arr[3]}"
       # wifi
       if [ ${sys_arr[10]} == "down" ]; then
-          wifi="%{T2}${icon_wifi_dis}%{T1}"
+          wifi="[%{T2}${icon_wifi_con} ${icon_wifi_dis}%{T1}]"
       else
           if [ ${sys_arr[10]//%} -lt 50 ]; then
               # low quality connection
-              wifi="%{T2}${icon_wifi_low}%{T1} ${sys_arr[10]}%"
+              wifi="[%{T2}${icon_wifi_low}%{T1} ${sys_arr[10]}%]"
           elif [ ${sys_arr[10]//%} -lt 80 ]; then
               # medium connection
-              wifi="%{T2}${icon_wifi_mid}%{T1} ${sys_arr[10]}%"
+              wifi="[%{T2}${icon_wifi_mid}%{T1} ${sys_arr[10]}%]"
           else
               # strong connection
-              wifi="%{T2}${icon_wifi_hi}%{T1} ${sys_arr[10]}%"
+              wifi="[%{T2}${icon_wifi_hi}%{T1} ${sys_arr[10]}%]"
           fi
       fi
       # wifi uploads
-      wifi_ul="%{T2}${icon_ul}%{T1} ${sys_arr[12]} K"
+      #wifi_ul="%{T2}${icon_ul}%{T1} ${sys_arr[12]} K"
       # wifi downloads
-      wifi_dl="%{T2}${icon_dl}%{T1} ${sys_arr[11]} K"
+      #wifi_dl="%{T2}${icon_dl}%{T1} ${sys_arr[11]} K"
       # bat
       if [ "${sys_arr[8]}" == "C" ]; then
           bat="%{T2}${icon_bat_ac}%{T1} ${sys_arr[9]}"
@@ -63,13 +63,16 @@ while read -r line ; do
           fi
       fi
       # cpu
-      cpu="%{T2}${icon_cpu}%{T1} ${sys_arr[4]}%"
+      cpu="[%{T2}${icon_cpu}%{T1} ${sys_arr[4]}%]"
       # mem
-      mem="%{T2}${icon_mem}%{T1} ${sys_arr[5]}"
+      mem="[%{T2}${icon_mem}%{T1} ${sys_arr[5]}]"
+      # sys tasks
+      task="[ %{T2}${icon_task}%{T1} ]"
       # disk /
-      diskr="%{T2}${icon_hd}%{T1} ${sys_arr[6]}%"
+      #diskr="%{T2}${icon_hd}%{T1} ${sys_arr[6]}%"
+      diskr="%{T2}[${icon_hd}]%{T1}"
       # disk home
-      diskh="%{T2}${icon_home}%{T1} ${sys_arr[7]}%"
+      #diskh="%{T2}${icon_home}%{T1} ${sys_arr[7]}%"
       ;;
     VOL*)
       # Volume
@@ -86,7 +89,7 @@ while read -r line ; do
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp} [ ${1#???} ]"
+           wsp="${wsp} %{R} ${1#???} %{R}"
            ;;
          INA*|URG*|ACT*)
            wsp="${wsp} ${1#???}"
@@ -98,11 +101,11 @@ while read -r line ; do
     WIN*)
       # window title
       title=$(xprop -id ${line#???} | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
-      title=" ${title}"
+      title=" ${title} "
       ;;
   esac
 
   # And finally, output
-  printf "%s\n" "%{l}${wsp}${stab}${sep_right}${title}%{r}${sep_left}${stab}%{A:${act_cpu_c}:}${cpu}%{A}${stab}%{A:${act_mem_c}:}${mem}%{A}${stab}${sep_left}${stab}%{A:${act_wifi_c}:}${wifi}%{A}${stab}${wifi_dl}${stab}${wifi_ul}${stab}${sep_left}${stab}%{A:${act_disk_c}:}${diskr}%{A}${stab}${diskh}${stab}${sep_left}${stab}%{A:${act_bat_c}:}${bat}%{A}${stab}${sep_left}${stab}%{A:${act_xbl_c}:}${xbl}%{A}${stab}${sep_left}${stab}%{A:${act_vol_c}:}${vol}%{A}${stab}${sep_left}${stab}%{A:${act_date_c}:}${date}${stab}${time}%{A}"
+  printf "%s\n" "%{l}${wsp}${stab}${sep_right}${stab}%{R}${stab}${title}${stab}%{R}%{r}${sep_left}${stab}%{A:${act_cpu_c}:}${cpu}%{A}${stab}%{A:${act_mem_c}:}${mem}%{A}${stab}%{A:${act_task_c}:}${task}%{A}${stab}%{A:${act_disk_c}:}${diskr}%{A}${stab}%{A:${act_wifi_c}:}${wifi}%{A}${stab}${sep_left}${stab}%{A:${act_bat_c}:}${bat}%{A}${stab}${sep_left}${stab}%{A:${act_xbl_c}:}${xbl}%{A}${stab}${sep_left}${stab}%{A:${act_vol_c}:}${vol}%{A}${stab}${sep_left}${stab}%{A:${act_date_c}:}${date}${stab}${time}%{A}"
 
 done

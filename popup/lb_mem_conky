@@ -1,5 +1,5 @@
 background no
-update_interval 10
+update_interval 3
 total_run_times 0
 override_utf8_locale yes
 short_units yes
@@ -11,5 +11,5 @@ format_human_readable true
 
 TEXT
 SYS \
-${fs_used_perc /} \
-${fs_used_perc /home} \
+${mem} ${memmax} \
+${swap} ${swapmax}\
